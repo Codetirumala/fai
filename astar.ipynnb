@@ -1,0 +1,61 @@
+def astar(start, goal, neighbors, heuristic):
+    # Set of nodes to be evaluated
+    open_set = {start}
+    
+    # Dictionary to store the previous node in optimal path
+    came_from = {}
+    
+    # Dictionary to store the cost of getting from the start node to a particular node
+    g_score = {start: 0}
+    
+    # Loop until all nodes are evaluated
+    while open_set:
+        # Select the node with the lowest known cost from the start node
+        current = min(open_set, key=lambda x: g_score.get(x, float('inf')))
+        
+        # If the current node is the goal node, reconstruct and return the path
+        if current == goal:
+            path = []
+            while current in came_from:
+                path.append(current)
+                current = came_from[current]
+            path.append(start)
+            return path[::-1]
+        
+        # Remove the current node from the set of open nodes
+        open_set.remove(current)
+        
+        # Explore neighbors of the current node
+        for neighbor in neighbors(current):
+            # Calculate the tentative g score from the start node to the neighbor node
+            tentative_g_score = g_score.get(current, float('inf')) + 1
+            
+            # If the tentative g score is less than the previously calculated g score for the neighbor
+            if tentative_g_score < g_score.get(neighbor, float('inf')):
+                # Update the previous node and g score for the neighbor
+                came_from[neighbor] = current
+                g_score[neighbor] = tentative_g_score
+                
+                # Add the neighbor to the set of open nodes
+                open_set.add(neighbor)
+
+# Example usage:
+
+# Function to return neighboring nodes of a given node
+def neighbors(node):
+    x, y = node
+    return [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
+
+# Function to estimate the cost from a node to the goal node
+def heuristic(a, b):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+# Define the start and goal nodes
+start = (0, 0)
+goal = (5, 5)
+
+# Find the shortest path from the start node to the goal node using A*
+path = astar(start, goal, neighbors, heuristic)
+
+# Print the resulting path
+print(path)
