@@ -1,0 +1,86 @@
+import pandas as pd
+
+# Sample DataFrame
+data = {
+    'A': [1, 2, 3, 4, 5],
+    'B': [6, 7, 8, 9, 10],
+    'C': [11, 12, 13, 14, 15]
+}
+df = pd.DataFrame(data)
+
+# Print original DataFrame
+print("Original DataFrame:")
+print(df)
+
+# Column Selection
+selected_column = df['B']
+print("\nSelected Column 'B':")
+print(selected_column)
+
+# Column Addition
+df['D'] = [16, 17, 18, 19, 20]
+print("\nDataFrame after adding column 'D':")
+print(df)
+
+# Column Deletion
+df.drop('C', axis=1, inplace=True)
+print("\nDataFrame after deleting column 'C':")
+print(df)
+
+
+
+
+
+import pandas as pd
+
+# Sample DataFrame
+data = {
+    'A': [1, 2, 3, 4, 5],
+    'B': [6, 7, 8, 9, 10],
+    'C': [11, 12, 13, 14, 15]
+}
+df = pd.DataFrame(data)
+
+# Print original DataFrame
+print("Original DataFrame:")
+print(df)
+
+# Row Selection
+selected_row = df.loc[2]  # Selecting row with index 2
+print("\nSelected Row at index 2:")
+print(selected_row)
+
+# Row Addition
+new_row = pd.Series([6, 7, 8], index=['A', 'B', 'C'])  # Creating a new row
+df = pd.concat([df, new_row.to_frame().T], ignore_index=True)
+print("\nDataFrame after adding a new row:")
+print(df)
+
+# Row Deletion
+df = df.drop(1)  # Deleting row with index 1
+print("\nDataFrame after deleting row at index 1:")
+print(df)
+
+
+
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+data={'category':['a','b','c','d','e'],
+      'value1':[10,20,30,40,50],
+      'value2':[12,22,32,42,52]
+     }
+#barplot
+df.plot(kind='bar', x='category',y=['value1','value2'],title='bar plot')
+plt.show()
+#histogram
+df['value1'].plot(kind='hist' ,bins=10 ,title='bar plot')
+plt.show()
+#lineplot
+df.plot(kind='line', x='category',y=['value1','value2'],marker='o',title='bar plot')
+plt.show()
+#scatterplot
+df.plot(kind='scatter', x='value1',y='value2',title='scatter plot')
+plt.show()
