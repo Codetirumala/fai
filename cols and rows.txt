@@ -19,7 +19,7 @@ print(selected_column)
 
 # Column Addition
 df['D'] = [16, 17, 18, 19, 20]
-print("\nDataFrame after adding column 'D':")
+print("\nDataFame after adding column 'D':")
 print(df)
 
 # Column Deletion
